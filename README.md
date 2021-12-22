@@ -1,2 +1,2 @@
-# github-initial-commit
-:lady_beetle: cli for fun initial commits (づ｡◕‿‿◕｡)づ
+# (づ｡◕‿‿◕｡)づ
+Cli for fun initial commits (づ｡◕‿‿◕｡)づ
