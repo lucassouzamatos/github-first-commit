@@ -8,6 +8,5 @@
    (do
      (println (:out (shell/sh "git" "add" ".")))
      (println (:out (shell/sh "git" "commit" "-m" "\"feat(testing): ༼ つ ◕_◕ ༽つ\""))))
-   (println args)
    (case (first args)
-    "push" (println (:out (shell/sh "git" "push")))))
+    "--push" (println (:out (shell/sh "git" "push")))))
