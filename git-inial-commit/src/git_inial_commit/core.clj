@@ -25,9 +25,7 @@
   (let [selected (get emoji-options (read-line))]
       (do
         (println (:out (shell/sh "git" "add" ".")))
-        (println (:out (shell/sh "git" "commit" "-m" (str "\"feat(testing):" selected "\"")))))
+        (println (:out (shell/sh "git" "commit" "-m" (str "feat(testing):" selected)))))
       (case (first args)
-        "--push" (do 
-               (println "pushing to repository...")
-               (println (:out (shell/sh "git" "push")))))))
+        "--push" (println (:out (shell/sh "git" "push"))))))
 
