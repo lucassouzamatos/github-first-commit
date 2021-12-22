@@ -26,8 +26,8 @@
       (do
         (println (:out (sh "git" "add" ".")))
         (println (:out (sh "git" "commit" "-m" (str "feat(testing): " selected)))))
-      (case (first args)
-        "--push" (println (:out (sh "git" "push"))))
+      (if (= (first args) "--push") 
+        (println (:out (sh "git" "push"))))
       (println "Wow! Commited successfully (づ｡◕‿‿◕｡)づ")
       (shutdown-agents)))
 
