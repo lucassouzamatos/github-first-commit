@@ -1,5 +1,5 @@
 (ns git-inial-commit.core
-  (:require [clojure.java.shell :as shell]
+  (:require [clojure.java.shell :refer :all]
             [clojure.string :as str])
   (:gen-class))
 
@@ -24,8 +24,9 @@
   (println (-get-message))
   (let [selected (get emoji-options (read-line))]
       (do
-        (println (:out (shell/sh "git" "add" ".")))
-        (println (:out (shell/sh "git" "commit" "-m" (str "feat(testing):" selected)))))
+        (println (:out (sh "git" "add" ".")))
+        (println (:out (sh "git" "commit" "-m" (str "feat(testing): " selected)))))
       (case (first args)
-        "--push" (println (:out (shell/sh "git" "push"))))))
+        "--push" (println (:out (sh "git" "push"))))
+      (shutdown-agents)))
 
