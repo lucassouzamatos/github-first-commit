@@ -1,16 +1,33 @@
 (ns git-inial-commit.core
-  (:require [clojure.java.shell :as shell])
+  (:require [clojure.java.shell :as shell]
+            [clojure.string :as str])
   (:gen-class))
 
+(def emoji-options
+  {"1" "( ͝° ͜ʖ͡°)"
+   "2" "ᕦ( ͡° ͜ʖ ͡°)ᕤ"
+   "3" "(づ｡◕‿‿◕｡)づ"})
+
+(defn -reduce-options
+  [previous option]
+  (let [[key value] option]
+      (str previous key ":" value "\n")))
+
+(defn -get-message
+  []
+  (let [options 
+        (reduce -reduce-options "" emoji-options)]
+    (str "Select the option \n" options)))
+
 (defn -main
-  "I don't do a whole lot ... yet."
   [& args]
-   (do
-     (println "adding all to repository")
-     (println (:out (shell/sh "git" "add" ".")))
-     (println "commiting with selected message")
-     (println (:out (shell/sh "git" "commit" "-m" "\"feat(testing): ༼ つ ◕_◕ ༽つ\""))))
-   (case (first args)
-    "--push" (do 
+  (println (-get-message))
+  (let [selected (get emoji-options (read-line))]
+      (do
+        (println (:out (shell/sh "git" "add" ".")))
+        (println (:out (shell/sh "git" "commit" "-m" (str "\"feat(testing):" selected "\"")))))
+      (case (first args)
+        "--push" (do 
                (println "pushing to repository...")
-               (println (:out (shell/sh "git" "push"))))))
+               (println (:out (shell/sh "git" "push")))))))
+
